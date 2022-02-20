@@ -46,11 +46,11 @@ function runEnter() {
 
     console.log(`filter selected value: ${fromDate},${City},${State},${Country},${Shape}`);
     //Filter based on input data
-    var filteredDate = tableData.filter(t => fromDate===t.datetime || String(City).length != 0 );
-    var filteredCity = filteredDate.filter(t => t.city === String(City) || String(City).length != 0 );
-    var filteredState = filteredCity.filter(t => t.state === String(State) || String(State).length != 0);
-    var filteredCountry = filteredState.filter(t => t.country === String(Country) || String(Country).length != 0);
-    var filteredData = filteredCountry.filter(t => t.shape === String(Shape) || String(Shape).length != 0);
+    var filteredDate = tableData.filter(t => fromDate===t.datetime || String(City).length == 0 );
+    var filteredCity = filteredDate.filter(t => t.city === String(City) || String(City).length == 0 );
+    var filteredState = filteredCity.filter(t => t.state === String(State) || String(State).length == 0);
+    var filteredCountry = filteredState.filter(t => t.country === String(Country) || String(Country).length == 0);
+    var filteredData = filteredCountry.filter(t => t.shape === String(Shape) || String(Shape).length == 0);
 
     if (filteredData.length != 0 ) {
     Object.values(filteredData).forEach(value => console.log(value));
