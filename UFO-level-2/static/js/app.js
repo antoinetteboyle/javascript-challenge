@@ -19,11 +19,11 @@ tableData.forEach((tableData) => {
 
 // Populate new filter inputs in form
 d3.select("#datetime.form-control").remove();
-var options = [{fromDate:'From 1/1/2010'},{toDate:'To 1/13/2010'},{City:'City e.g. benton'},{State:'State e.g. ar'},{Country:'Country e.g. us'},{Shape:'e.g. triangle'}];
+var options = [{fromDate:'Day 1/1/2010 to 1/13/2010'},{City:'City e.g. benton'},{State:'State e.g. ar'},{Country:'Country e.g. us'},{Shape:'e.g. triangle'}];
 for (let i = 0; i < options.length; i++) {
     let item = options[i];
     console.log(`item${item}`);
-    let input = d3.select(".filter.list-group-item");
+    let input = d3.select("li.filter.list-group-item");
     Object.entries(item).forEach(([key, value]) => 
     (input.append("input").attr("id",key).attr("placeholder",value)),
     )
@@ -37,15 +37,14 @@ function runEnter() {
     d3.event.preventDefault();
     // Select the input element and get value property
     var fromDate = d3.select("#fromDate").property("value");
-    var toDate = d3.select("#toDate").property("value");
     var City = d3.select("#City").property("value");
     var State = d3.select("#State").property("value");
     var Country = d3.select("#Country").property("value");
     var Shape = d3.select("#Shape").property("value");
 
-    console.log(`filter selected value: ${fromDate},${toDate},${City},${State},${Country},${Shape}`);
+    console.log(`filter selected value: ${fromDate},${City},${State},${Country},${Shape}`);
     //Filter based on input data
-    var filteredDate = tableData.filter(t => fromDate>=t.datetime && toDate<=t.datetime);
+    var filteredDate = tableData.filter(t => fromDate===t.datetime);
     var filteredCity = filteredDate.filter(t => t.city === String(City));
     var filteredState = filteredCity.filter(t => t.state === String(State));
     var filteredCountry = filteredState.filter(t => t.country === String(Country));
