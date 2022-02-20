@@ -19,17 +19,19 @@ tableData.forEach((tableData) => {
 
 // Populate new filter inputs in form
 d3.select("#datetime.form-control").remove();
-var options = [{fromDate:'Day 1/1/2010 to 1/13/2010'},{City:'City e.g. benton'},{State:'State e.g. ar'},{Country:'Country e.g. us'},{Shape:'e.g. triangle'}];
+var options = [{fromDate:'1/1/2010 - 1/13/2010'},{City:'City e.g. benton'},{State:'State e.g. ar'},{Country:'Country e.g. us'},{Shape:'Shape e.g. triangle'}];
 for (let i = 0; i < options.length; i++) {
     let item = options[i];
     console.log(`item${item}`);
     let input = d3.select("li.filter.list-group-item");
     Object.entries(item).forEach(([key, value]) => 
-    (input.append("input").attr("id",key).attr("placeholder",value)),
+    (input.append("input").attr("class","form-control").attr("id",key).attr("placeholder",value)),
     )
   }
 
 //on filter button click run filter
+var form = d3.selectAll("input");
+form.on("submit",runEnter);
 var button = d3.select("#filter-btn.btn.btn-default");
 button.on("click",runEnter);
 // Event handler function for the input selected
@@ -44,11 +46,11 @@ function runEnter() {
 
     console.log(`filter selected value: ${fromDate},${City},${State},${Country},${Shape}`);
     //Filter based on input data
-    var filteredDate = tableData.filter(t => fromDate===t.datetime);
-    var filteredCity = filteredDate.filter(t => t.city === String(City));
-    var filteredState = filteredCity.filter(t => t.state === String(State));
-    var filteredCountry = filteredState.filter(t => t.country === String(Country));
-    var filteredData = filteredCountry.filter(t => t.shape === String(Shape));
+    var filteredDate = tableData.filter(t => fromDate===t.datetime || String(City).length != 0 );
+    var filteredCity = filteredDate.filter(t => t.city === String(City) || String(City).length != 0 );
+    var filteredState = filteredCity.filter(t => t.state === String(State) || String(State).length != 0);
+    var filteredCountry = filteredState.filter(t => t.country === String(Country) || String(Country).length != 0);
+    var filteredData = filteredCountry.filter(t => t.shape === String(Shape) || String(Shape).length != 0);
 
     if (filteredData.length != 0 ) {
     Object.values(filteredData).forEach(value => console.log(value));

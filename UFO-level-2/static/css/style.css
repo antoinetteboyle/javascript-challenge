@@ -3,6 +3,14 @@
   font-family: Ubuntu, sans-serif;
 }
 
+.li.filter.list-group-item {
+  overflow: auto;
+  width: 10%;}
+
+.input#datetime {
+  overflow: auto;
+  width: 10%;}
+
 html,
 body {
   height: 100%;

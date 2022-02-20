@@ -12,8 +12,8 @@ tableData.forEach((tableData) => {
     });
 });
 
-//on filter button click run filter
-var form = d3.select("#datetime");
+//on filter button click/enter run filter
+var form = d3.select(".form-control#datetime");
 form.on("submit",runEnter);
 var button = d3.select("#filter-btn.btn.btn-default");
 button.on("click",runEnter);
