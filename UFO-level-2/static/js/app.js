@@ -25,7 +25,7 @@ for (let i = 0; i < options.length; i++) {
     console.log(`item${item}`);
     let input = d3.select("li.filter.list-group-item");
     Object.entries(item).forEach(([key, value]) => 
-    (input.append("input").attr("class","form-control").attr("id",key).attr("placeholder",value)),
+    (input.append("input").attr("class","form-control").attr("id",key).attr("type","text").attr("placeholder",value)),
     )
   }
 
@@ -46,7 +46,7 @@ function runEnter() {
 
     console.log(`filter selected value: ${fromDate},${City},${State},${Country},${Shape}`);
     //Filter based on input data
-    var filteredDate = tableData.filter(t => fromDate===t.datetime || String(City).length == 0 );
+    var filteredDate = tableData.filter(t => fromDate===t.datetime || String(fromDate).length == 0 );
     var filteredCity = filteredDate.filter(t => t.city === String(City) || String(City).length == 0 );
     var filteredState = filteredCity.filter(t => t.state === String(State) || String(State).length == 0);
     var filteredCountry = filteredState.filter(t => t.country === String(Country) || String(Country).length == 0);
